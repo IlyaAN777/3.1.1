@@ -3,11 +3,13 @@ package com.example311.service;
 import com.example311.model.User;
 import com.example311.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class UserService {
+@Transactional
+public class UserService implements UserServ {
     private final UserRepository userRepository;
 
 
@@ -15,19 +17,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getUserById(Long id) {
-        return userRepository.getReferenceById(id);
-    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserById(long id) {
+        return userRepository.getReferenceById(id);
     }
 
     public void saveUser(User user) {
         userRepository.save(user);
     }
 
-    public void deleteById(Long id) {
+    @Override
+    public void deleteById(long id) {
         userRepository.deleteById(id);
     }
+
+
 }
