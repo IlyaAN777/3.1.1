@@ -17,7 +17,7 @@ public class UserService implements UserServ {
         this.userRepository = userRepository;
     }
 
-
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -27,6 +27,7 @@ public class UserService implements UserServ {
         return userRepository.getReferenceById(id);
     }
 
+    @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }
